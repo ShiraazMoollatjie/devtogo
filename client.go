@@ -5,7 +5,7 @@ import "net/http"
 // Client makes all the API calls to dev.to.
 type Client struct {
 	baseURL string
-	c       *http.Client
+	http    *http.Client
 }
 
 // Option allows the client to be configured with different options.
@@ -21,6 +21,7 @@ func withBaseURL(url string) Option {
 func NewClient(opts ...Option) *Client {
 	res := &Client{
 		baseURL: "http://dev.to/api",
+		http:    http.DefaultClient,
 	}
 	for _, o := range opts {
 		o(res)
