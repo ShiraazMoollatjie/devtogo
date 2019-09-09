@@ -1,4 +1,4 @@
-module github.com/ShiraazMoollatjie/devto-go
+module github.com/ShiraazMoollatjie/devtogo
 
 go 1.12
 
