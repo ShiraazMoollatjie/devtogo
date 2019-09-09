@@ -23,6 +23,7 @@ func (c *Client) GetArticles() (Articles, error) {
 }
 
 // The structs in this file was generated via https://mholt.github.io/json-to-go/.
+
 // Articles represents an article from the dev.to api.
 type Articles []struct {
 	TypeOf                 string       `json:"type_of"`

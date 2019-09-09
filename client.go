@@ -7,8 +7,6 @@ import (
 	"net/http"
 )
 
-const ()
-
 // Client makes all the API calls to dev.to.
 type Client struct {
 	baseURL string
@@ -41,6 +39,7 @@ func getRequest(method, url string) (*http.Request, error) {
 	return http.NewRequest(method, url, nil)
 }
 
+// Get returns an error if the http client cannot perform a HTTP GET for the provided URL.
 func (c *Client) Get(url string, target interface{}) error {
 	req, err := getRequest(http.MethodGet, url)
 	if err != nil {

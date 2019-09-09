@@ -44,6 +44,8 @@ func TestGetArticles(t *testing.T) {
 func unmarshalGoldenFileBytes(t *testing.T, filename string, payload interface{}) []byte {
 	p := filepath.Join("testdata", filename)
 	b, err := ioutil.ReadFile(p)
+	assert.NoError(t, err)
+
 	err = json.Unmarshal(b, &payload)
 	assert.NoError(t, err)
 
