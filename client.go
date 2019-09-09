@@ -2,12 +2,13 @@ package devtogo
 
 import "net/http"
 
-// Client makes all the API calls to dev.to
+// Client makes all the API calls to dev.to.
 type Client struct {
 	baseURL string
 	c       *http.Client
 }
 
+// Option allows the client to be configured with different options.
 type Option func(*Client)
 
 func withBaseURL(url string) Option {
@@ -16,6 +17,7 @@ func withBaseURL(url string) Option {
 	}
 }
 
+// NewClient creates a dev.to client with the provided options.
 func NewClient(opts ...Option) *Client {
 	res := &Client{
 		baseURL: "http://dev.to/api",
