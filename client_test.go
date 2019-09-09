@@ -1,4 +1,4 @@
-package devto_go
+package devtogo
 
 import (
 	"fmt"
