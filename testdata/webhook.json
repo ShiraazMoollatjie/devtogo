@@ -1,0 +1,19 @@
+{
+	"type_of": "webhook_endpoint",
+	"id": 1,
+	"source": "DEV",
+	"target_url": "https://example.com/webhooks/webhook1",
+	"events": [
+	"article_created"
+	],
+	"created_at": "2019-09-02T09:47:39.230Z",
+	"user": {
+	"name": "bob",
+	"username": "bob",
+	"twitter_username": null,
+	"github_username": "bob",
+	"website_url": null,
+	"profile_image": "...",
+	"profile_image_90": "..."
+	}
+	}
