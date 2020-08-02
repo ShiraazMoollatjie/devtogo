@@ -1,0 +1,47 @@
+{
+    "type_of": "comment",
+    "id_code": "m51e",
+    "body_html": "\u003c!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\"\u003e\n\u003chtml\u003e\u003cbody\u003e\n\u003cp\u003eThis is such a nice article for a Beginners to VSCode. I've spent a lot of time searching for many of these options when I switched to VSCode.\u003c/p\u003e\n\n\u003cp\u003eNice Work Zoe :)\u003c/p\u003e\n\n\u003cp\u003ePS: Check out \"Material Icon Them\". I love having a vibrant icon choice when i work with multiple files/rechnologies.\u003c/p\u003e\n\n\u003c/body\u003e\u003c/html\u003e\n",
+    "user": {
+        "name": "Amirthananth",
+        "username": "amirthananth",
+        "twitter_username": null,
+        "github_username": "Amirthananth",
+        "website_url": null,
+        "profile_image": "https://res.cloudinary.com/practicaldev/image/fetch/s--fFrO9MKj--/c_fill,f_auto,fl_progressive,h_640,q_auto,w_640/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/344227/5540c9af-298d-46c9-a430-8a115d8c2b48.jpeg",
+        "profile_image_90": "https://res.cloudinary.com/practicaldev/image/fetch/s--uOJExNjP--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/344227/5540c9af-298d-46c9-a430-8a115d8c2b48.jpeg"
+    },
+    "children": [
+        {
+            "type_of": "comment",
+            "id_code": "m5oe",
+            "body_html": "\u003c!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\"\u003e\n\u003chtml\u003e\u003cbody\u003e\n\u003cp\u003eHey Amirthananth! Thanks a lot for reading \u0026amp; glad to hear your feedback :)\u003c/p\u003e\n\n\u003cp\u003eMaterial Icon Theme is such a cool recommendation! Love it \u0026amp; just installed. Thanks for sharing it!\u003c/p\u003e\n\n\u003c/body\u003e\u003c/html\u003e\n",
+            "user": {
+                "name": "Zoe Chew 🇲🇾👩‍💻📕",
+                "username": "whizzzoe",
+                "twitter_username": "whizzzoe",
+                "github_username": null,
+                "website_url": "http://whizzoe.com/",
+                "profile_image": "https://res.cloudinary.com/practicaldev/image/fetch/s--1I0UIm0r--/c_fill,f_auto,fl_progressive,h_640,q_auto,w_640/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/344030/abdde240-257b-4495-bf6a-49937a74c0a5.jpg",
+                "profile_image_90": "https://res.cloudinary.com/practicaldev/image/fetch/s--5PgOsspR--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/344030/abdde240-257b-4495-bf6a-49937a74c0a5.jpg"
+            },
+            "children": [
+                {
+                    "type_of": "comment",
+                    "id_code": "m60a",
+                    "body_html": "\u003c!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.0 Transitional//EN\" \"http://www.w3.org/TR/REC-html40/loose.dtd\"\u003e\n\u003chtml\u003e\u003cbody\u003e\n\u003cp\u003eGlad to hear :) \u003c/p\u003e\n\n\u003c/body\u003e\u003c/html\u003e\n",
+                    "user": {
+                        "name": "Amirthananth",
+                        "username": "amirthananth",
+                        "twitter_username": null,
+                        "github_username": "Amirthananth",
+                        "website_url": null,
+                        "profile_image": "https://res.cloudinary.com/practicaldev/image/fetch/s--fFrO9MKj--/c_fill,f_auto,fl_progressive,h_640,q_auto,w_640/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/344227/5540c9af-298d-46c9-a430-8a115d8c2b48.jpeg",
+                        "profile_image_90": "https://res.cloudinary.com/practicaldev/image/fetch/s--uOJExNjP--/c_fill,f_auto,fl_progressive,h_90,q_auto,w_90/https://dev-to-uploads.s3.amazonaws.com/uploads/user/profile_image/344227/5540c9af-298d-46c9-a430-8a115d8c2b48.jpeg"
+                    },
+                    "children": []
+                }
+            ]
+        }
+    ]
+}
