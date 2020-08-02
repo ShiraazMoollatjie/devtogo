@@ -2,14 +2,22 @@ package devtogo
 
 import (
 	"fmt"
-	"time"
 )
 
 // PublishedArticle returns a published article with post content for the provided article id.
-// https://docs.dev.to/api/#operation/getArticleById
+// See https://docs.dev.to/api/#operation/getArticleById.
 func (c *Client) PublishedArticle(id int32) (*Article, error) {
 	var res Article
 	err := c.get(c.baseURL+fmt.Sprintf("/articles/%d", id), &res)
+
+	return &res, err
+}
+
+// PublishedArticleByPath returns a published article with post content for the provided article id.
+// See https://docs.dev.to/api/#operation/getArticleById.
+func (c *Client) PublishedArticleByPath(username, slug string) (*Article, error) {
+	var res Article
+	err := c.get(c.baseURL+fmt.Sprintf("/articles/%s/%s", username, slug), &res)
 
 	return &res, err
 }
@@ -59,16 +67,16 @@ func (c *Client) GetAllMyArticles(args Arguments) (Articles, error) {
 	return res, err
 }
 
-// CreateArticle creates a post on dev.to according to https://docs.dev.to/api/#tag/articles/paths/~1articles/post.
-func (c *Client) CreateArticle(req CreateArticle) (Article, error) {
+// CreateArticle creates a post with the provided request content on the dev.to platform according to https://docs.dev.to/api/#operation/createArticle.
+func (c *Client) CreateArticle(req CreateArticleReq) (Article, error) {
 	var res Article
 	err := c.post(c.baseURL+"/articles", ArticleReq{Article: req}, &res)
 
 	return res, err
 }
 
-// Update creates a put on dev.to according to https://docs.dev.to/api/#tag/articles/paths/~1articles~1{id}/put
-func (c *Client) UpdateArticle(id int, req CreateArticle) (Article, error) {
+// UpdateArticle will update a dev.to post with the provided ID and request content according to https://docs.dev.to/api/#operation/updateArticle.
+func (c *Client) UpdateArticle(id int, req CreateArticleReq) (Article, error) {
 	var res Article
 	err := c.put(c.baseURL+fmt.Sprintf("/articles/%d", id), ArticleReq{Article: req}, &res)
 
@@ -79,49 +87,58 @@ func (c *Client) UpdateArticle(id int, req CreateArticle) (Article, error) {
 
 // ArticleReq is a container type to create articles.
 type ArticleReq struct {
-	Article CreateArticle `json:"article"`
+	Article CreateArticleReq `json:"article"`
 }
 
-// CreateArticle is a request struct that creates an article.
-type CreateArticle struct {
-	Title        string   `json:"title"`
-	Published    bool     `json:"published"`
-	BodyMarkdown string   `json:"body_markdown"`
-	Tags         []string `json:"tags"`
-	Series       string   `json:"series,omitempty"`
-	CanonicalURL string   `json:"canonical_url"`
+// CreateArticleReq is a request struct that creates an article.
+type CreateArticleReq struct {
+	Title          string   `json:"title"`
+	Published      bool     `json:"published"`
+	BodyMarkdown   string   `json:"body_markdown"`
+	Tags           []string `json:"tags"`
+	Series         string   `json:"series,omitempty"`
+	CanonicalURL   string   `json:"canonical_url"`
+	MainImageURL   string   `json:main_image`
+	Description    string   `json:description`
+	OrganizationID int      `json:organization_id`
 }
 
 // Articles represents an article from the dev.to api.
-type Articles []Article
+type Articles []struct {
+	Article
+	TagList []string `json:"tag_list"`
+	Tags    string   `json:"tags"`
+}
 
 // Article represents a single article in the dev.to api. Also has more fields than Articles.
 type Article struct {
-	TypeOf               string    `json:"type_of"`
-	ID                   int       `json:"id"`
-	Title                string    `json:"title"`
-	Description          string    `json:"description"`
-	CoverImage           string    `json:"cover_image"`
-	ReadablePublishDate  string    `json:"readable_publish_date"`
-	SocialImage          string    `json:"social_image"`
-	TagList              []string  `json:"tag_list"`
-	Tags                 string    `json:"tags"`
-	Slug                 string    `json:"slug"`
-	Path                 string    `json:"path"`
-	URL                  string    `json:"url"`
-	CanonicalURL         string    `json:"canonical_url"`
-	CommentsCount        int       `json:"comments_count"`
-	PublicReactionsCount int       `json:"public_reactions_count"`
-	CollectionID         int       `json:"collection_id"`
-	CreatedAt            time.Time `json:"created_at"`
-	EditedAt             time.Time `json:"edited_at"`
-	CrosspostedAt        time.Time `json:"crossposted_at"`
-	PublishedAt          time.Time `json:"published_at"`
-	LastCommentAt        time.Time `json:"last_comment_at"`
-	PublishedTimestamp   time.Time `json:"published_timestamp"`
-	BodyHTML             string    `json:"body_html"`
-	BodyMarkdown         string    `json:"body_markdown"`
-	User                 User      `json:"user"`
+	TypeOf               string       `json:"type_of"`
+	ID                   int          `json:"id"`
+	Title                string       `json:"title"`
+	Description          string       `json:"description"`
+	CoverImage           string       `json:"cover_image"`
+	ReadablePublishDate  string       `json:"readable_publish_date"`
+	SocialImage          string       `json:"social_image"`
+	TagList              []string     `json:"tags"`
+	Tags                 string       `json:"tag_list"`
+	Slug                 string       `json:"slug"`
+	Path                 string       `json:"path"`
+	URL                  string       `json:"url"`
+	CanonicalURL         string       `json:"canonical_url"`
+	CommentsCount        int          `json:"comments_count"`
+	PublicReactionsCount int          `json:"public_reactions_count"`
+	CollectionID         int          `json:"collection_id"`
+	CreatedAt            emptyTime    `json:"created_at"`
+	EditedAt             emptyTime    `json:"edited_at"`
+	CrosspostedAt        emptyTime    `json:"crossposted_at"`
+	PublishedAt          emptyTime    `json:"published_at"`
+	LastCommentAt        emptyTime    `json:"last_comment_at"`
+	PublishedTimestamp   emptyTime    `json:"published_timestamp"`
+	BodyHTML             string       `json:"body_html"`
+	BodyMarkdown         string       `json:"body_markdown"`
+	User                 User         `json:"user"`
+	Organization         Organization `json:organization`
+	FlareTag             FlareTag     `json:flare_tag`
 }
 
 // User represents a user from the dev.to api.
@@ -142,4 +159,15 @@ type Organization struct {
 	Slug           string `json:"slug"`
 	ProfileImage   string `json:"profile_image"`
 	ProfileImage90 string `json:"profile_image_90"`
+}
+
+// FlareTag is a special colorized tag for the article.
+type FlareTag struct {
+	Name string `json:name`
+
+	// BackgroundColorHex is a hexadecimal string value of the background color.
+	BackgroundColorHex string `json:bg_color_hex`
+
+	// TextColorHex is a hexadecimal string value of the background color.
+	TextColorHex string `json:text_color_hex`
 }

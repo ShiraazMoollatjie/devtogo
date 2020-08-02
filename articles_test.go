@@ -11,7 +11,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetArticle(t *testing.T) {
+func TestPublishedArticle(t *testing.T) {
 	var res Article
 	b := unmarshalGoldenFileBytes(t, "article.json", &res)
 
@@ -22,6 +22,21 @@ func TestGetArticle(t *testing.T) {
 	}))
 	client := NewClient(withBaseURL(ts.URL))
 	article, err := client.PublishedArticle(167919)
+	assert.NoError(t, err)
+	assert.Equal(t, &res, article)
+}
+
+func TestPublishedArticleByPath(t *testing.T) {
+	var res Article
+	b := unmarshalGoldenFileBytes(t, "article.json", &res)
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		assert.Equal(t, "/articles/devteam/using-go-is-awesome", r.URL.Path)
+		w.WriteHeader(http.StatusOK)
+		w.Write(b)
+	}))
+	client := NewClient(withBaseURL(ts.URL))
+	article, err := client.PublishedArticleByPath("devteam", "using-go-is-awesome")
 	assert.NoError(t, err)
 	assert.Equal(t, &res, article)
 }
@@ -121,7 +136,7 @@ func TestGetAllMyArticles(t *testing.T) {
 func TestCreateArticle(t *testing.T) {
 	var res Article
 	b := unmarshalGoldenFileBytes(t, "create_article.json", &res)
-	testArticle := CreateArticle{
+	testArticle := CreateArticleReq{
 		Tags:         []string{"go", "help"},
 		Series:       "api",
 		Published:    false,
@@ -155,7 +170,7 @@ func TestCreateArticle(t *testing.T) {
 func TestCreateArticleNoSeriesField(t *testing.T) {
 	var res Article
 	b := unmarshalGoldenFileBytes(t, "create_article.json", &res)
-	testArticle := CreateArticle{
+	testArticle := CreateArticleReq{
 		Tags:         []string{"go", "help"},
 		Published:    false,
 		BodyMarkdown: "This is some markdown",
@@ -188,7 +203,7 @@ func TestCreateArticleNoSeriesField(t *testing.T) {
 func TestUpdateArticle(t *testing.T) {
 	var res Article
 	b := unmarshalGoldenFileBytes(t, "create_article.json", &res)
-	testArticle := CreateArticle{
+	testArticle := CreateArticleReq{
 		Tags:         []string{"go", "help"},
 		Series:       "api",
 		Published:    false,
