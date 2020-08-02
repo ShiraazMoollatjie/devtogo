@@ -31,8 +31,8 @@ func (c *Client) Articles(args Arguments) (Articles, error) {
 	return res, err
 }
 
-// GetMyArticles returns a slice of articles according to https://docs.dev.to/api/#tag/articles/paths/~1articles~1me/get.
-func (c *Client) GetMyArticles(args Arguments) (Articles, error) {
+// MyArticles returns a slice of articles according to https://docs.dev.to/api/#operation/getUserArticles.
+func (c *Client) MyArticles(args Arguments) (Articles, error) {
 	var res Articles
 	qp := args.toQueryParams().Encode()
 	err := c.get(c.baseURL+"/articles/me?"+qp, &res)
@@ -40,8 +40,8 @@ func (c *Client) GetMyArticles(args Arguments) (Articles, error) {
 	return res, err
 }
 
-// GetMyPublishedArticles returns a slice of published articles according to https://docs.dev.to/api/#tag/articles/paths/~1articles~1me~1published/get.
-func (c *Client) GetMyPublishedArticles(args Arguments) (Articles, error) {
+// MyPublishedArticles returns a slice of published articles according to https://docs.dev.to/api/#operation/getUserPublishedArticles.
+func (c *Client) MyPublishedArticles(args Arguments) (Articles, error) {
 	var res Articles
 	qp := args.toQueryParams().Encode()
 	err := c.get(c.baseURL+"/articles/me/published?"+qp, &res)
@@ -49,8 +49,8 @@ func (c *Client) GetMyPublishedArticles(args Arguments) (Articles, error) {
 	return res, err
 }
 
-// GetMyUnpublishedArticles returns a slice of unpublished articles according to https://docs.dev.to/api/#tag/articles/paths/~1articles~1me~1unpublished/get.
-func (c *Client) GetMyUnpublishedArticles(args Arguments) (Articles, error) {
+// MyUnpublishedArticles returns a slice of unpublished articles according to https://docs.dev.to/api/#operation/getUserUnpublishedArticles.
+func (c *Client) MyUnpublishedArticles(args Arguments) (Articles, error) {
 	var res Articles
 	qp := args.toQueryParams().Encode()
 	err := c.get(c.baseURL+"/articles/me/unpublished?"+qp, &res)
@@ -58,8 +58,8 @@ func (c *Client) GetMyUnpublishedArticles(args Arguments) (Articles, error) {
 	return res, err
 }
 
-// GetAllMyArticles returns a slice of unpublished articles according to https://docs.dev.to/api/#tag/articles/paths/~1articles~1me~1all/get.
-func (c *Client) GetAllMyArticles(args Arguments) (Articles, error) {
+// AllMyArticles returns a slice of unpublished articles according to https://docs.dev.to/api/#operation/getUserAllArticles.
+func (c *Client) AllMyArticles(args Arguments) (Articles, error) {
 	var res Articles
 	qp := args.toQueryParams().Encode()
 	err := c.get(c.baseURL+"/articles/me/all?"+qp, &res)

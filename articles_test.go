@@ -80,7 +80,7 @@ func TestGetMyArticles(t *testing.T) {
 	}))
 
 	client := NewClient(withBaseURL(ts.URL))
-	articles, err := client.GetMyArticles(Defaults())
+	articles, err := client.MyArticles(Defaults())
 	assert.NoError(t, err)
 	assert.Equal(t, res, articles)
 }
@@ -96,7 +96,7 @@ func TestGetMyPublishedArticles(t *testing.T) {
 	}))
 
 	client := NewClient(withBaseURL(ts.URL))
-	articles, err := client.GetMyPublishedArticles(Defaults())
+	articles, err := client.MyPublishedArticles(Defaults())
 	assert.NoError(t, err)
 	assert.Equal(t, res, articles)
 }
@@ -112,7 +112,7 @@ func TestGetMyUnpublishedArticles(t *testing.T) {
 	}))
 
 	client := NewClient(withBaseURL(ts.URL))
-	articles, err := client.GetMyUnpublishedArticles(Defaults())
+	articles, err := client.MyUnpublishedArticles(Defaults())
 	assert.NoError(t, err)
 	assert.Equal(t, res, articles)
 }
@@ -128,7 +128,7 @@ func TestGetAllMyArticles(t *testing.T) {
 	}))
 
 	client := NewClient(withBaseURL(ts.URL))
-	articles, err := client.GetAllMyArticles(Defaults())
+	articles, err := client.AllMyArticles(Defaults())
 	assert.NoError(t, err)
 	assert.Equal(t, res, articles)
 }
