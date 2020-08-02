@@ -1,7 +1,7 @@
 package devtogo
 
 // PodcaseEpisodes returns podcast episodes that are according to https://docs.dev.to/api/#operation/getPodcastEpisodes.
-func (c *Client) PodcaseEpisodes(args Arguments) (PodcastEpisodes, error) {
+func (c *Client) PodcastEpisodes(args Arguments) (PodcastEpisodes, error) {
 	var res PodcastEpisodes
 	qp := args.toQueryParams().Encode()
 	err := c.get(c.baseURL+"/podcast_episodes?"+qp, &res)

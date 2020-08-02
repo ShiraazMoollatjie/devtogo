@@ -29,7 +29,7 @@ func TestPodcastEpisodes(t *testing.T) {
 			}))
 
 			client := NewClient(withBaseURL(ts.URL))
-			pe, err := client.PodcaseEpisodes(test.arguments)
+			pe, err := client.PodcastEpisodes(test.arguments)
 			assert.NoError(t, err)
 			assert.Equal(t, res, pe)
 		})
