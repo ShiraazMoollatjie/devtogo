@@ -68,6 +68,33 @@ func TestGetArticles(t *testing.T) {
 		})
 	}
 }
+func TestGetVideoArticles(t *testing.T) {
+	var res VideoArticles
+	b := unmarshalGoldenFileBytes(t, "videos.json", &res)
+
+	tests := []struct {
+		name                string
+		arguments           Arguments
+		expectedQueryParams string
+	}{
+		{"No params", Defaults(), ""},
+		{"Page param", Arguments{"page": "1"}, "page=1"},
+	}
+	for _, test := range tests {
+		t.Run(test.name, func(t *testing.T) {
+			ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				assert.Equal(t, "/videos?"+test.expectedQueryParams, r.URL.String())
+				w.WriteHeader(http.StatusOK)
+				w.Write(b)
+			}))
+
+			client := NewClient(withBaseURL(ts.URL))
+			articles, err := client.VideoArticles(test.arguments)
+			assert.NoError(t, err)
+			assert.Equal(t, res, articles)
+		})
+	}
+}
 
 func TestGetMyArticles(t *testing.T) {
 	var res Articles

@@ -31,6 +31,15 @@ func (c *Client) Articles(args Arguments) (Articles, error) {
 	return res, err
 }
 
+// VideoArticles returns articles that are videos according to https://docs.dev.to/api/#operation/getArticlesWithVideo.
+func (c *Client) VideoArticles(args Arguments) (VideoArticles, error) {
+	var res VideoArticles
+	qp := args.toQueryParams().Encode()
+	err := c.get(c.baseURL+"/videos?"+qp, &res)
+
+	return res, err
+}
+
 // MyArticles returns a slice of articles according to https://docs.dev.to/api/#operation/getUserArticles.
 func (c *Client) MyArticles(args Arguments) (Articles, error) {
 	var res Articles
@@ -170,4 +179,17 @@ type FlareTag struct {
 
 	// TextColorHex is a hexadecimal string value of the background color.
 	TextColorHex string `json:"text_color_hex"`
+}
+
+type VideoArticles []struct {
+	TypeOf                 string `json:"type_of"`
+	ID                     int    `json:"id"`
+	Path                   string `json:"path"`
+	CloudinaryVideoURL     string `json:"cloudinary_video_url"`
+	Title                  string `json:"title"`
+	UserID                 int    `json:"user_id"`
+	VideoDurationInMinutes string `json:"video_duration_in_minutes"`
+	User                   struct {
+		Name string `json:"name"`
+	} `json:"user"`
 }
