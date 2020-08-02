@@ -1,6 +1,9 @@
 package devtogo
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 // Listing will retrieve a listing based on the provided id.
 func (c *Client) Listing(id int) (*Listing, error) {
@@ -26,6 +29,48 @@ func (c *Client) ListingsByCategory(category ListingCategory) (Listings, error) 
 
 	return res, err
 }
+
+// CreateListing creates a listing if creating the user or the organization on which behalf the user is creating for has enough creadits.
+func (c *Client) CreateListing(req CreateListingReq) (*Listing, error) {
+	var res Listing
+	err := c.post(c.baseURL+"/listings", listingReq{Listing: req}, &res)
+
+	return &res, err
+}
+
+// UpdateListing updates a listing if creating the user or the organization on which behalf the user is creating for has enough creadits.
+func (c *Client) UpdateListing(id int, req CreateListingReq) (*Listing, error) {
+	var res Listing
+	err := c.put(c.baseURL+fmt.Sprintf("/listings/%d", id), listingReq{Listing: req}, &res)
+
+	return &res, err
+}
+
+type listingReq struct {
+	Listing CreateListingReq `json:"listing"`
+}
+
+type CreateListingReq struct {
+	Title             string          `json:"title"`
+	BodyMarkdown      string          `json:"body_markdown"`
+	Category          ListingCategory `json:"category"`
+	Tags              []string        `json:"tags"`
+	TagList           string          `json:"tag_list"`
+	ExpiresAt         time.Time       `json:"expiresAt"`
+	ContactViaConnect bool            `json:"contact_via_connect"`
+	Location          string          `json:"location"`
+	OrganizationID    int             `json:"organization_id"`
+	Action            ListingAction   `json:"action"`
+}
+
+type ListingAction string
+
+const (
+	ListingActionDraft     ListingAction = "draft"
+	ListingActionBump      ListingAction = "bump"
+	ListingActionPublish   ListingAction = "publish"
+	ListingActionUnpublish ListingAction = "unpublish"
+)
 
 type ListingCategory string
 
@@ -56,13 +101,6 @@ type Listing struct {
 	Category      ListingCategory `json:"category"`
 	ProcessedHTML string          `json:"processed_html"`
 	Published     bool            `json:"published"`
-	User          struct {
-		Name            string      `json:"name"`
-		Username        string      `json:"username"`
-		TwitterUsername interface{} `json:"twitter_username"`
-		GithubUsername  string      `json:"github_username"`
-		WebsiteURL      interface{} `json:"website_url"`
-		ProfileImage    string      `json:"profile_image"`
-		ProfileImage90  string      `json:"profile_image_90"`
-	} `json:"user"`
+	User          User            `json:"user"`
+	Organization  Organization    `json:"organization"`
 }
