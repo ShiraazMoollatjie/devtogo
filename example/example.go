@@ -14,5 +14,12 @@ func main() {
 		log.Fatalf("something went wrong: %+v", err)
 	}
 
-	fmt.Printf("Articles: %+v", al)
+	fmt.Printf("All Articles: %+v", al)
+
+	a, err := cl.PublishedArticle(416009)
+	if err != nil {
+		log.Fatalf("something went wrong: %+v", err)
+	}
+
+	fmt.Printf("Article: %+v", a.ID)
 }
