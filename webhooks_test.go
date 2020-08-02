@@ -5,7 +5,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestWebhooks(t *testing.T) {
@@ -22,15 +22,15 @@ func TestWebhooks(t *testing.T) {
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
 			ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-				assert.Equal(t, "/webhooks", r.URL.String())
+				require.Equal(t, "/webhooks", r.URL.String())
 				w.WriteHeader(http.StatusOK)
 				w.Write(b)
 			}))
 
 			client := NewClient(withBaseURL(ts.URL))
 			articles, err := client.Webhooks()
-			assert.NoError(t, err)
-			assert.Equal(t, res, articles)
+			require.NoError(t, err)
+			require.Equal(t, res, articles)
 		})
 	}
 }
@@ -40,12 +40,12 @@ func TestWebhook(t *testing.T) {
 	b := unmarshalGoldenFileBytes(t, "webhook.json", &res)
 
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		assert.Equal(t, "/webhooks/167919", r.URL.Path)
+		require.Equal(t, "/webhooks/167919", r.URL.Path)
 		w.WriteHeader(http.StatusOK)
 		w.Write(b)
 	}))
 	client := NewClient(withBaseURL(ts.URL))
 	article, err := client.Webhook(167919)
-	assert.NoError(t, err)
-	assert.Equal(t, &res, article)
+	require.NoError(t, err)
+	require.Equal(t, &res, article)
 }
