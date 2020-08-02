@@ -93,52 +93,35 @@ type CreateArticle struct {
 }
 
 // Articles represents an article from the dev.to api.
-type Articles []struct {
-	TypeOf                 string       `json:"type_of"`
-	ID                     int          `json:"id"`
-	Title                  string       `json:"title"`
-	Description            string       `json:"description"`
-	CoverImage             string       `json:"cover_image"`
-	PublishedAt            time.Time    `json:"published_at"`
-	TagList                []string     `json:"tag_list"`
-	Slug                   string       `json:"slug"`
-	Path                   string       `json:"path"`
-	URL                    string       `json:"url"`
-	CanonicalURL           string       `json:"canonical_url"`
-	CommentsCount          int          `json:"comments_count"`
-	PositiveReactionsCount int          `json:"positive_reactions_count"`
-	PublishedTimestamp     emptyTime    `json:"published_timestamp"`
-	User                   User         `json:"user"`
-	Organization           Organization `json:"organization"`
-	Published              bool         `json:"published"`
-	Markdown               string       `json:"body_markdown"`
-}
+type Articles []Article
 
 // Article represents a single article in the dev.to api. Also has more fields than Articles.
 type Article struct {
-	TypeOf                 string      `json:"type_of"`
-	ID                     int         `json:"id"`
-	Title                  string      `json:"title"`
-	Description            string      `json:"description"`
-	CoverImage             string      `json:"cover_image"`
-	ReadablePublishDate    string      `json:"readable_publish_date"`
-	SocialImage            string      `json:"social_image"`
-	TagList                string      `json:"tag_list"`
-	Tags                   []string    `json:"tags"`
-	Slug                   string      `json:"slug"`
-	Path                   string      `json:"path"`
-	URL                    string      `json:"url"`
-	CanonicalURL           string      `json:"canonical_url"`
-	CommentsCount          int         `json:"comments_count"`
-	PositiveReactionsCount int         `json:"positive_reactions_count"`
-	CreatedAt              time.Time   `json:"created_at"`
-	EditedAt               interface{} `json:"edited_at"`
-	CrosspostedAt          interface{} `json:"crossposted_at"`
-	PublishedAt            emptyTime   `json:"published_at"`
-	LastCommentAt          time.Time   `json:"last_comment_at"`
-	BodyHTML               string      `json:"body_html"`
-	BodyMarkdown           string      `json:"body_markdown"`
-	User                   User        `json:"user"`
+	TypeOf               string    `json:"type_of"`
+	ID                   int       `json:"id"`
+	Title                string    `json:"title"`
+	Description          string    `json:"description"`
+	CoverImage           string    `json:"cover_image"`
+	ReadablePublishDate  string    `json:"readable_publish_date"`
+	SocialImage          string    `json:"social_image"`
+	TagList              []string  `json:"tag_list"`
+	Tags                 string    `json:"tags"`
+	Slug                 string    `json:"slug"`
+	Path                 string    `json:"path"`
+	URL                  string    `json:"url"`
+	CanonicalURL         string    `json:"canonical_url"`
+	CommentsCount        int       `json:"comments_count"`
+	PublicReactionsCount int       `json:"public_reactions_count"`
+	CollectionID         int       `json:"collection_id"`
+	CreatedAt            time.Time `json:"created_at"`
+	EditedAt             time.Time `json:"edited_at"`
+	CrosspostedAt        time.Time `json:"crossposted_at"`
+	PublishedAt          time.Time `json:"published_at"`
+	LastCommentAt        time.Time `json:"last_comment_at"`
+	PublishedTimestamp   time.Time `json:"published_timestamp"`
+	BodyHTML             string    `json:"body_html"`
+	BodyMarkdown         string    `json:"body_markdown"`
+	User                 User      `json:"user"`
 }
 
 // User represents a user from the dev.to api.
