@@ -21,7 +21,7 @@ func TestGetArticle(t *testing.T) {
 		w.Write(b)
 	}))
 	client := NewClient(withBaseURL(ts.URL))
-	article, err := client.GetArticle(167919)
+	article, err := client.PublishedArticle(167919)
 	assert.NoError(t, err)
 	assert.Equal(t, &res, article)
 }
@@ -47,7 +47,7 @@ func TestGetArticles(t *testing.T) {
 			}))
 
 			client := NewClient(withBaseURL(ts.URL))
-			articles, err := client.GetArticles(test.arguments)
+			articles, err := client.Articles(test.arguments)
 			assert.NoError(t, err)
 			assert.Equal(t, res, articles)
 		})
