@@ -9,7 +9,6 @@ func (c *Client) Tags(args Arguments) (Tags, error) {
 	return res, err
 }
 
-
 type Tags []struct {
 	ID           int    `json:"id"`
 	Name         string `json:"name"`

@@ -150,17 +150,6 @@ type Article struct {
 	FlareTag             FlareTag     `json:"flare_tag"`
 }
 
-// User represents a user from the dev.to api.
-type User struct {
-	Name            string `json:"name"`
-	Username        string `json:"username"`
-	TwitterUsername string `json:"twitter_username"`
-	GithubUsername  string `json:"github_username"`
-	WebsiteURL      string `json:"website_url"`
-	ProfileImage    string `json:"profile_image"`
-	ProfileImage90  string `json:"profile_image_90"`
-}
-
 // Organization represents an organization from the dev.to api.
 type Organization struct {
 	Name           string `json:"name"`
