@@ -98,9 +98,9 @@ type CreateArticleReq struct {
 	Tags           []string `json:"tags"`
 	Series         string   `json:"series,omitempty"`
 	CanonicalURL   string   `json:"canonical_url"`
-	MainImageURL   string   `json:main_image`
-	Description    string   `json:description`
-	OrganizationID int      `json:organization_id`
+	MainImageURL   string   `json:"main_image"`
+	Description    string   `json:"description"`
+	OrganizationID int      `json:"organization_id"`
 }
 
 // Articles represents an article from the dev.to api.
@@ -137,8 +137,8 @@ type Article struct {
 	BodyHTML             string       `json:"body_html"`
 	BodyMarkdown         string       `json:"body_markdown"`
 	User                 User         `json:"user"`
-	Organization         Organization `json:organization`
-	FlareTag             FlareTag     `json:flare_tag`
+	Organization         Organization `json:"organization"`
+	FlareTag             FlareTag     `json:"flare_tag"`
 }
 
 // User represents a user from the dev.to api.
@@ -163,11 +163,11 @@ type Organization struct {
 
 // FlareTag is a special colorized tag for the article.
 type FlareTag struct {
-	Name string `json:name`
+	Name string `json:"name"`
 
 	// BackgroundColorHex is a hexadecimal string value of the background color.
-	BackgroundColorHex string `json:bg_color_hex`
+	BackgroundColorHex string `json:"bg_color_hex"`
 
 	// TextColorHex is a hexadecimal string value of the background color.
-	TextColorHex string `json:text_color_hex`
+	TextColorHex string `json:"text_color_hex"`
 }
