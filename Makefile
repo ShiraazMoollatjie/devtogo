@@ -5,3 +5,6 @@ vet:
 
 test:
 	go test ./...
+
+example:
+	go run example/example.go
