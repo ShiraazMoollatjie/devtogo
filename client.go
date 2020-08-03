@@ -148,3 +148,24 @@ func (c *Client) put(url string, payload interface{}, target interface{}) error 
 func (c *Client) post(url string, payload interface{}, target interface{}) error {
 	return c.save(http.MethodPost, url, payload, target)
 }
+
+// delete returns an error if the http client cannot perform a HTTP DELETE for the provided URL.
+func (c *Client) delete(url string, payload interface{}) error {
+	req, err := c.getRequest(http.MethodDelete, url, nil)
+	if err != nil {
+		return err
+	}
+
+	resp, err := c.http.Do(req)
+	if err != nil {
+		return err
+	}
+
+	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return errors.New("error from dev.to api")
+	}
+
+	return nil
+}
